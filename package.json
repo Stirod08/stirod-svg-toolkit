@@ -1,25 +1,31 @@
 {
-  "name": "stirod-icons",
+  "name": "stirod-svg-toolkit",
   "version": "1.0.0",
-  "description": "Framework agnostic SVG sprite generator and icon library",
+  "description": "Framework agnostic SVG toolkit for generating sprites, metadata and types",
   "type": "module",
   "author": "Stirod",
   "license": "MIT",
   "keywords": [
-    "icons",
     "svg",
     "sprite",
-    "typescript",
+    "toolkit",
+    "icons",
+    "cli",
     "astro",
     "react",
     "vue",
     "svelte"
   ],
   "files": [
+    "bin",
+    "core",
     "dist"
   ],
+  "bin": {
+    "stirod-svg-toolkit": "./bin/cli.js"
+  },
   "scripts": {
-    "build:sprite": "node scripts/generate-sprite.js"
+    "build:sprite": "node core/sprite-generator.js"
   },
   "devEngines": {
     "packageManager": {
@@ -30,5 +36,8 @@
   },
   "devDependencies": {
     "svgo": "^4.0.1"
+  },
+  "dependencies": {
+    "stirod-svg-toolkit": "link:"
   }
 }
