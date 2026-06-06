@@ -1,0 +1,31 @@
+{
+  "name": "stirod-icons",
+  "version": "1.0.0",
+  "description": "Framework agnostic SVG sprite generator and icon library",
+  "type": "module",
+  "author": "Stirod",
+  "license": "MIT",
+  "keywords": [
+    "icons",
+    "svg",
+    "sprite",
+    "typescript",
+    "astro",
+    "react",
+    "vue",
+    "svelte"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build:sprite": "node scripts/generate-sprite.js"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.1.3",
+      "onFail": "download"
+    }
+  }
+}
