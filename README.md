@@ -61,7 +61,7 @@ pnpm add -D github:Stirod08/stirod-svg-toolkit
 ### Initialize toolkit
 
 ```bash
-stirod-svg-toolkit init
+pnpm exec stirod-svg-toolkit init
 ```
 
 Creates:
@@ -90,7 +90,27 @@ icons/
 ### Generate outputs
 
 ```bash
-stirod-svg-toolkit build
+pnpm exec stirod-svg-toolkit build
+```
+
+## Scripts opcionales
+
+Para simplificar el flujo de trabajo puedes agregar scripts a tu proyecto:
+
+```json
+{
+  "scripts": {
+    "icons:init": "stirod-svg-toolkit init",
+    "icons:build": "stirod-svg-toolkit build"
+  }
+}
+```
+
+Luego podrás ejecutar:
+
+```bash
+pnpm icons:init
+pnpm icons:build
 ```
 
 ---

@@ -26,7 +26,9 @@
     "stirod-svg-toolkit": "./bin/cli.js"
   },
   "scripts": {
-    "build:sprite": "node core/sprite-generator.js"
+    "build:sprite": "node core/sprite-generator.js",
+    "icons:init": "stirod-svg-toolkit init",
+    "icons:build": "stirod-svg-toolkit build"
   },
   "devEngines": {
     "packageManager": {
