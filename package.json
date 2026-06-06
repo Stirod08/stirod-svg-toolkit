@@ -19,6 +19,7 @@
   "files": [
     "bin",
     "core",
+    "templates",
     "dist"
   ],
   "bin": {
