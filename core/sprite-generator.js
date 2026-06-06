@@ -1,13 +1,27 @@
+import { pathToFileURL } from "node:url";
+import { resolve } from "node:path";
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename } from "node:path";
 import { optimize } from "svgo";
-import config from "../stirod.config.js";
+import { dirname } from "node:path";
+
+const CONFIG_PATH = resolve(process.cwd(), "stirod.config.js");
+
+const configModule = await import(pathToFileURL(CONFIG_PATH).href);
+
+const config = configModule.default;
 
 const ICONS_DIR = config.iconsDir;
-const DIST_DIR = "./dist";
+
+const SPRITE_OUTPUT = config.output.sprite;
+const GENERATED_DIR = config.output.generated;
 
 // Crear dist si no existe
-mkdirSync(DIST_DIR, { recursive: true });
+mkdirSync(dirname(SPRITE_OUTPUT), { recursive: true });
+
+mkdirSync(GENERATED_DIR, {
+  recursive: true,
+});
 
 // Obtener SVG ordenados
 const files = readdirSync(ICONS_DIR)
@@ -93,7 +107,7 @@ ${symbols.join("\n")}
 </svg>
 `;
 
-writeFileSync(join(DIST_DIR, "sprite.svg"), sprite);
+writeFileSync(SPRITE_OUTPUT, sprite);
 
 /* ------------------------------ icons.ts ------------------------------ */
 
@@ -104,16 +118,19 @@ ${iconNames.map((name) => `  "${name}"`).join(",\n")}
 export type IconName = typeof icons[number];
 `;
 
-writeFileSync(join(DIST_DIR, "icons.ts"), iconsTs);
+writeFileSync(join(GENERATED_DIR, "icons.ts"), iconsTs);
 
 /* ----------------------------- icons.json ----------------------------- */
 
-writeFileSync(join(DIST_DIR, "icons.json"), JSON.stringify(iconNames, null, 2));
+writeFileSync(
+  join(GENERATED_DIR, "icons.json"),
+  JSON.stringify(iconNames, null, 2),
+);
 
 /* --------------------------- metadata.json ---------------------------- */
 
 writeFileSync(
-  join(DIST_DIR, "metadata.json"),
+  join(GENERATED_DIR, "metadata.json"),
   JSON.stringify(metadata, null, 2),
 );
 
@@ -122,7 +139,7 @@ writeFileSync(
 const indexTs = `export * from "./icons";
 `;
 
-writeFileSync(join(DIST_DIR, "index.ts"), indexTs);
+writeFileSync(join(GENERATED_DIR, "index.ts"), indexTs);
 
 /* --------------------------- preview.html --------------------------- */
 
@@ -186,7 +203,7 @@ ${iconNames
     (name) => `
 <div class="card">
     <svg>
-        <use href="./sprite.svg#${name}"></use>
+        <use href="../../public/icons/sprite.svg#${name}">
     </svg>
 
     <div class="name">${name}</div>
@@ -201,7 +218,7 @@ ${iconNames
 </html>
 `;
 
-writeFileSync(join(DIST_DIR, "preview.html"), previewHtml);
+writeFileSync(join(GENERATED_DIR, "preview.html"), previewHtml);
 
 /* -------------------------------- Logs -------------------------------- */
 
