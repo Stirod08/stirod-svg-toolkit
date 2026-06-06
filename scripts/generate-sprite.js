@@ -37,9 +37,19 @@ const symbols = files.map((file) => {
   }
 
   const viewBox = viewBoxMatch[1];
+  const fillMatch = optimizedSvg.match(/fill="([^"]+)"/);
+  const strokeMatch = optimizedSvg.match(/stroke="([^"]+)"/);
+  const strokeWidthMatch = optimizedSvg.match(/stroke-width="([^"]+)"/);
+  const strokeLinecapMatch = optimizedSvg.match(/stroke-linecap="([^"]+)"/);
+  const strokeLinejoinMatch = optimizedSvg.match(/stroke-linejoin="([^"]+)"/);
 
   metadata[id] = {
     viewBox,
+    fill: fillMatch?.[1],
+    stroke: strokeMatch?.[1],
+    strokeWidth: strokeWidthMatch?.[1],
+    strokeLinecap: strokeLinecapMatch?.[1],
+    strokeLinejoin: strokeLinejoinMatch?.[1],
   };
 
   iconNames.push(id);
@@ -53,8 +63,24 @@ const symbols = files.map((file) => {
     )
     .trim();
 
+  const fill = fillMatch?.[1];
+  const stroke = strokeMatch?.[1];
+  const strokeLinecap = strokeLinecapMatch?.[1];
+  const strokeLinejoin = strokeLinejoinMatch?.[1];
+
+  const attrs = [
+    `id="${id}"`,
+    `viewBox="${viewBox}"`,
+    fill ? `fill="${fill}"` : "",
+    stroke ? `stroke="${stroke}"` : "",
+    strokeLinecap ? `stroke-linecap="${strokeLinecap}"` : "",
+    strokeLinejoin ? `stroke-linejoin="${strokeLinejoin}"` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return `
-  <symbol id="${id}" viewBox="${viewBox}">
+  <symbol ${attrs}>
     ${innerContent}
   </symbol>`;
 });
