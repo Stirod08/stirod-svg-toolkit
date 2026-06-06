@@ -91,33 +91,6 @@ const indexTs = `export * from "./icons";
 
 writeFileSync(join(DIST_DIR, "index.ts"), indexTs);
 
-/* ------------------------------ README.md ----------------------------- */
-
-const readme = `# Stirod Icons
-
-Sprite SVG generado automáticamente.
-
-## Iconos disponibles
-
-${iconNames.map((name) => `- ${name}`).join("\n")}
-
-## Uso HTML
-
-\`\`\`html
-<svg>
-  <use href="/sprite.svg#${iconNames[0]}" />
-</svg>
-\`\`\`
-
-## Uso TypeScript
-
-\`\`\`ts
-import type { IconName } from "./icons";
-\`\`\`
-`;
-
-writeFileSync(join(DIST_DIR, "README.md"), readme);
-
 /* --------------------------- preview.html --------------------------- */
 
 const previewHtml = `<!DOCTYPE html>
@@ -207,7 +180,6 @@ console.log(`✅ icons.ts`);
 console.log(`✅ icons.json`);
 console.log(`✅ metadata.json`);
 console.log(`✅ index.ts`);
-console.log(`✅ README.md`);
 console.log(`✅ preview.html`);
 console.log(`📦 Total iconos: ${iconNames.length}`);
 console.log("");
