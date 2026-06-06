@@ -1,17 +1,37 @@
 # Stirod Icons
 
-SVG Sprite Generator para proyectos web.
+Framework-agnostic SVG Sprite Generator and Icon Toolkit.
 
-## Características
+Build, organize and distribute SVG icon libraries from a single source of truth.
 
-- Generación automática de SVG Sprite.
-- Generación de tipos TypeScript.
-- Generación de metadata.
-- Preview automática de iconos.
-- Independiente del framework.
-- Compatible con Astro, React, Vue, Svelte o HTML puro.
+## Features
 
-## Estructura
+- SVG Sprite generation
+- TypeScript definitions
+- JSON icon catalog
+- Metadata generation
+- Automatic icon preview page
+- Framework agnostic
+- GitHub friendly workflow
+
+## Project Structure
+
+```txt
+stirod-icons/
+├── icons/
+├── scripts/
+└── dist/
+```
+
+### Source Icons
+
+Place SVG files inside:
+
+```txt
+icons/
+```
+
+Example:
 
 ```txt
 icons/
@@ -20,13 +40,15 @@ icons/
 └── search.svg
 ```
 
-## Generar archivos
+## Build
+
+Generate all artifacts:
 
 ```bash
 pnpm build:sprite
 ```
 
-Archivos generados:
+Generated output:
 
 ```txt
 dist/
@@ -38,7 +60,9 @@ dist/
 └── preview.html
 ```
 
-## Uso
+## Usage
+
+### HTML
 
 ```html
 <svg>
@@ -46,16 +70,22 @@ dist/
 </svg>
 ```
 
-## Desarrollo
+### TypeScript
 
-Agregar SVG dentro de:
+```ts
+import type { IconName } from "./dist/icons";
+```
+
+## Preview
+
+After running the build command, open:
 
 ```txt
-icons/
+dist/preview.html
 ```
 
-Luego ejecutar:
+to browse all available icons.
 
-```bash
-pnpm build:sprite
-```
+## License
+
+MIT

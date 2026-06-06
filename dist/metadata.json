@@ -1,5 +1,50 @@
 {
+  "astro": {
+    "viewBox": "0 0 32 32"
+  },
+  "css3": {
+    "viewBox": "0 0 32 32"
+  },
   "facebook": {
+    "viewBox": "0 0 24 24"
+  },
+  "html5": {
+    "viewBox": "0 0 32 32"
+  },
+  "instagran": {
+    "viewBox": "0 0 24 24"
+  },
+  "javascript": {
+    "viewBox": "0 0 32 32"
+  },
+  "linkedin": {
+    "viewBox": "0 0 24 24"
+  },
+  "linux": {
+    "viewBox": "0 0 32 32"
+  },
+  "meta": {
+    "viewBox": "0 0 24 24"
+  },
+  "nextjs": {
+    "viewBox": "0 0 24 24"
+  },
+  "react": {
+    "viewBox": "0 0 32 32"
+  },
+  "tailwind": {
+    "viewBox": "0 0 32 32"
+  },
+  "twitch": {
+    "viewBox": "0 0 24 24"
+  },
+  "twitter": {
+    "viewBox": "0 0 24 24"
+  },
+  "whatsapp": {
+    "viewBox": "0 0 24 24"
+  },
+  "youtube": {
     "viewBox": "0 0 24 24"
   }
 }

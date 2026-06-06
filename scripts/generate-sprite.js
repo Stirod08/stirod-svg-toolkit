@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, basename } from "node:path";
+import { optimize } from "svgo";
 
 const DIST_DIR = "./dist";
 const ICONS_DIR = "./icons";
@@ -20,11 +21,16 @@ const metadata = {};
 const iconNames = [];
 
 const symbols = files.map((file) => {
-  const svg = readFileSync(join(ICONS_DIR, file), "utf8");
+  //const svg = readFileSync(join(ICONS_DIR, file), "utf8");
+  const rawSvg = readFileSync(join(ICONS_DIR, file), "utf8");
+
+  const optimizedSvg = optimize(rawSvg, {
+    multipass: true,
+  }).data;
 
   const id = basename(file, ".svg");
 
-  const viewBoxMatch = svg.match(/viewBox="([^"]+)"/);
+  const viewBoxMatch = optimizedSvg.match(/viewBox="([^"]+)"/);
 
   if (!viewBoxMatch) {
     throw new Error(`El icono "${file}" no tiene viewBox`);
@@ -38,7 +44,7 @@ const symbols = files.map((file) => {
 
   iconNames.push(id);
 
-  const innerContent = svg
+  const innerContent = optimizedSvg
     .replace(/<svg[^>]*>/g, "")
     .replace(/<\/svg>/g, "")
     .replace(
