@@ -207,10 +207,6 @@ h1 {
 .icon {
     width: 64px;
     height: 64px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .icon svg {
@@ -230,11 +226,25 @@ h1 {
     text-align: center;
 }
 
+/* Ocultar sprite interno */
+
+.sprite-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
 </style>
 
 </head>
 
 <body>
+
+<!-- Sprite embebido -->
+<div class="sprite-defs">
+${sprite}
+</div>
 
 <h1>🚀 Stirod Icons Preview</h1>
 
@@ -247,7 +257,7 @@ ${iconNames
 
     <div class="icon">
         <svg>
-            <use href="../../public/icons/sprite.svg#${name}" />
+            <use href="#${name}" />
         </svg>
     </div>
 
