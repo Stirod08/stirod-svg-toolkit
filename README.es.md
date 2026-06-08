@@ -1,15 +1,15 @@
 # 🚀 Stirod SVG Toolkit
 
 <p align="center">
-  <strong>Herramienta CLI agnóstica al framework para generar sprites SVG, metadatos y tipos TypeScript.</strong>
+  <strong>CLI agnóstico al framework para generar sprites SVG, metadatos y tipos TypeScript.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/license/Stirod08/stirod-svg-toolkit" alt="Licencia">
-  <img src="https://img.shields.io/github/stars/Stirod08/stirod-svg-toolkit" alt="Estrellas">
+  <img src="https://img.shields.io/github/license/Stirod08/stirod-svg-toolkit" alt="License">
+  <img src="https://img.shields.io/github/stars/Stirod08/stirod-svg-toolkit" alt="Stars">
   <img src="https://img.shields.io/github/issues/Stirod08/stirod-svg-toolkit" alt="Issues">
-  <img src="https://img.shields.io/github/repo-size/Stirod08/stirod-svg-toolkit" alt="Tamaño del repositorio">
-  <img src="https://img.shields.io/badge/Framework-Agnostic-blue" alt="Agnóstico al Framework">
+  <img src="https://img.shields.io/github/repo-size/Stirod08/stirod-svg-toolkit" alt="Repo Size">
+  <img src="https://img.shields.io/badge/Framework-Agnostic-blue" alt="Framework Agnostic">
   <img src="https://img.shields.io/badge/CLI-Ready-success" alt="CLI Ready">
 </p>
 
@@ -17,17 +17,17 @@
 
 ## ✨ Descripción
 
-**Stirod SVG Toolkit** es una herramienta CLI que transforma una carpeta de archivos SVG en un completo sistema de iconos para tu proyecto.
+**Stirod SVG Toolkit** es una herramienta CLI que transforma una carpeta de archivos SVG en un kit completo de iconos.
 
-A partir de una única colección de archivos SVG, genera automáticamente:
+A partir de una única fuente, genera automáticamente:
 
 - Sprite SVG
-- Tipos TypeScript
+- Definiciones TypeScript
 - Catálogo JSON de iconos
 - Metadatos
 - Página de previsualización
 
-Ideal para proyectos desarrollados con Astro, React, Vue, Svelte, Next.js o cualquier framework moderno.
+Compatible con Astro, React, Vue, Svelte, Next.js o cualquier proyecto frontend moderno.
 
 ---
 
@@ -35,20 +35,20 @@ Ideal para proyectos desarrollados con Astro, React, Vue, Svelte, Next.js o cual
 
 - ⚡ Optimización de SVG mediante SVGO
 - 🎨 Generación automática de sprites SVG
-- 📦 Tipos TypeScript generados automáticamente
-- 📋 Catálogo JSON de iconos
+- 📦 Tipos TypeScript para autocompletado
+- 📋 Catálogo de iconos en formato JSON
 - 🏷️ Generación de metadatos
 - 👀 Página de previsualización automática
-- 🧩 Compatible con cualquier framework
-- 🛠️ Flujo de trabajo basado en CLI
-- 🔧 Directorios de salida configurables
-- 📁 Colecciones de iconos personalizadas por proyecto
+- 🧩 Independiente del framework
+- 🛠️ Flujo de trabajo mediante CLI
+- 🔧 Salidas configurables
+- 📁 Colecciones de iconos específicas por proyecto
 
 ---
 
 ## 📦 Instalación
 
-### Desde GitHub
+Instala la herramienta como dependencia de desarrollo:
 
 ```bash
 pnpm add -D github:Stirod08/stirod-svg-toolkit
@@ -56,18 +56,20 @@ pnpm add -D github:Stirod08/stirod-svg-toolkit
 
 ---
 
-## 🚀 Inicio rápido
+## 🚀 Inicio Rápido
 
-### Inicializar el toolkit
+### 1. Inicializar la herramienta
+
+Ejecuta:
 
 ```bash
-stirod-svg-toolkit init
+pnpm exec stirod-svg-toolkit init
 ```
 
-Esto generará:
+Este comando creará:
 
 ```txt
-icons/
+svg-icons/
 └── .gitkeep
 
 stirod.config.js
@@ -75,58 +77,78 @@ stirod.config.js
 
 ---
 
-### Agregar iconos SVG
+### 2. Agregar tus iconos SVG
+
+Coloca todos tus archivos SVG dentro de:
 
 ```txt
-icons/
+svg-icons/
 ├── logo.svg
-├── buscar.svg
+├── search.svg
 ├── menu.svg
-└── usuario.svg
+└── user.svg
 ```
+
+Esta carpeta será la fuente principal de tus iconos.
 
 ---
 
-### Generar los archivos
+### 3. Generar el sprite y archivos auxiliares
+
+Ejecuta:
 
 ```bash
+pnpm exec stirod-svg-toolkit build
+```
+
+La herramienta:
+
+- Leerá los SVG de `svg-icons/`
+- Optimizará los archivos usando SVGO
+- Generará un sprite SVG
+- Generará tipos TypeScript
+- Generará metadatos
+- Generará una página de previsualización
+
+---
+
+## 🔄 Cómo Funciona
+
+```txt
+svg-icons/
+├── search.svg
+├── menu.svg
+└── user.svg
+
+       │
+       ▼
+
 stirod-svg-toolkit build
+
+       │
+       ▼
+
+public/icons/sprite.svg
+
+src/generated/
+├── icons.ts
+├── icons.json
+├── metadata.json
+├── index.ts
+└── preview.html
 ```
 
 ---
 
-## ⚙️ Configuración
-
-Archivo generado automáticamente:
-
-```js
-export default {
-  iconsDir: "./icons",
-
-  output: {
-    sprite: "./public/icons/sprite.svg",
-    generated: "./src/generated",
-  },
-
-  generate: {
-    types: true,
-    metadata: true,
-    preview: true,
-  },
-};
-```
-
----
-
-## 📂 Estructura de salida
+## 📁 Archivos Generados
 
 Después de ejecutar:
 
 ```bash
-stirod-svg-toolkit build
+pnpm exec stirod-svg-toolkit build
 ```
 
-se generarán los siguientes archivos:
+Se generarán los siguientes archivos:
 
 ```txt
 public/
@@ -144,13 +166,106 @@ src/
 
 ---
 
+## ⚠️ Importante
+
+No modifiques manualmente los archivos generados.
+
+Los archivos ubicados en:
+
+```txt
+public/icons/
+src/generated/
+```
+
+se regeneran automáticamente cada vez que ejecutes:
+
+```bash
+pnpm exec stirod-svg-toolkit build
+```
+
+---
+
+## 📂 Estructura del Proyecto
+
+Después de ejecutar el comando de inicialización, tu proyecto tendrá:
+
+```txt
+svg-icons/
+└── .gitkeep
+
+stirod.config.js
+```
+
+### svg-icons/
+
+Directorio donde debes almacenar todos los archivos SVG.
+
+Agrega aquí todos los iconos antes de ejecutar el comando de compilación.
+
+### stirod.config.js
+
+Archivo de configuración de la herramienta.
+
+Permite personalizar:
+
+- Directorio de origen de los SVG
+- Ruta de salida del sprite
+- Ruta de generación de archivos auxiliares
+
+---
+
+## 🛠️ Scripts Opcionales
+
+Para simplificar el flujo de trabajo puedes agregar scripts a tu proyecto:
+
+```json
+{
+  "scripts": {
+    "icons:init": "stirod-svg-toolkit init",
+    "icons:build": "stirod-svg-toolkit build"
+  }
+}
+```
+
+Luego podrás ejecutar:
+
+```bash
+pnpm icons:init
+pnpm icons:build
+```
+
+---
+
+## ⚙️ Configuración
+
+Configuración generada por defecto:
+
+```js
+export default {
+  iconsDir: "./svg-icons",
+
+  output: {
+    sprite: "./public/icons/sprite.svg",
+    generated: "./src/generated",
+  },
+
+  generate: {
+    types: true,
+    metadata: true,
+    preview: true,
+  },
+};
+```
+
+---
+
 ## 🧩 Uso
 
 ### HTML
 
 ```html
 <svg width="24" height="24">
-  <use href="/icons/sprite.svg#buscar"></use>
+  <use href="/icons/sprite.svg#search"></use>
 </svg>
 ```
 
@@ -160,7 +275,7 @@ src/
 
 ```astro
 <svg width="24" height="24">
-  <use href="/icons/sprite.svg#buscar" />
+  <use href="/icons/sprite.svg#search" />
 </svg>
 ```
 
@@ -172,7 +287,7 @@ src/
 export function Icon() {
   return (
     <svg width="24" height="24">
-      <use href="/icons/sprite.svg#buscar" />
+      <use href="/icons/sprite.svg#search" />
     </svg>
   );
 }
@@ -186,52 +301,25 @@ export function Icon() {
 import type { IconName } from "./generated/icons";
 ```
 
-Tipos generados automáticamente:
+Generado automáticamente:
 
 ```ts
-export const icons = ["buscar", "menu", "usuario"] as const;
+export const icons = ["search", "menu", "user"] as const;
 
 export type IconName = (typeof icons)[number];
 ```
 
 ---
 
-## 🖼️ Vista previa
+## 🖼️ Previsualización
 
-El toolkit genera automáticamente una página de previsualización:
+La herramienta genera automáticamente una página de previsualización:
 
 ```txt
 src/generated/preview.html
 ```
 
-Ábrela en tu navegador para visualizar todos los iconos disponibles y validar que el sprite fue generado correctamente.
-
----
-
-## 💡 Proximas Versiones
-
-### v1.1
-
-- Mensajes de error más amigables para SVG inválidos
-- Modo observador (watch mode)
-- Comando `init` interactivo
-- Mejoras en la página de previsualización
-
-### v2.0
-
-- Adaptador para Astro
-- Adaptador para React
-- Adaptador para Vue
-- Adaptador para Svelte
-- Generación automática de componentes de iconos
-
----
-
-## 🤝 Contribuciones
-
-Las contribuciones, ideas y sugerencias son bienvenidas.
-
-Si encuentras un problema o tienes una mejora en mente, puedes abrir un Issue o enviar un Pull Request.
+Ábrela en tu navegador para visualizar todos los iconos generados.
 
 ---
 

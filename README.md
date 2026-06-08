@@ -48,7 +48,7 @@ Perfect for Astro, React, Vue, Svelte, Next.js or any modern frontend project.
 
 ## 📦 Installation
 
-### Using GitHub
+Install the toolkit as a development dependency:
 
 ```bash
 pnpm add -D github:Stirod08/stirod-svg-toolkit
@@ -58,16 +58,18 @@ pnpm add -D github:Stirod08/stirod-svg-toolkit
 
 ## 🚀 Quick Start
 
-### Initialize toolkit
+### 1. Initialize the toolkit
+
+Run:
 
 ```bash
 pnpm exec stirod-svg-toolkit init
 ```
 
-Creates:
+This command creates:
 
 ```txt
-icons/
+svg-icons/
 └── .gitkeep
 
 stirod.config.js
@@ -75,27 +77,146 @@ stirod.config.js
 
 ---
 
-### Add your SVG files
+### 2. Add your SVG files
+
+Place all your SVG files inside:
 
 ```txt
-icons/
+svg-icons/
 ├── logo.svg
 ├── search.svg
 ├── menu.svg
 └── user.svg
 ```
 
+This folder is the **source of truth** for your icons.
+
 ---
 
-### Generate outputs
+### 3. Generate the sprite and metadata
+
+Run:
 
 ```bash
 pnpm exec stirod-svg-toolkit build
 ```
 
-## Scripts opcionales
+The toolkit will:
 
-Para simplificar el flujo de trabajo puedes agregar scripts a tu proyecto:
+- Read SVG files from `svg-icons/`
+- Optimize them using SVGO
+- Generate a sprite
+- Generate TypeScript types
+- Generate metadata
+- Generate a preview page
+
+---
+
+## 🔄 How It Works
+
+```txt
+svg-icons/
+├── search.svg
+├── menu.svg
+└── user.svg
+
+       │
+       ▼
+
+stirod-svg-toolkit build
+
+       │
+       ▼
+
+public/icons/sprite.svg
+
+src/generated/
+├── icons.ts
+├── icons.json
+├── metadata.json
+├── index.ts
+└── preview.html
+```
+
+---
+
+## 📁 Generated Files
+
+After running:
+
+```bash
+pnpm exec stirod-svg-toolkit build
+```
+
+The following files are generated:
+
+```txt
+public/
+└── icons/
+    └── sprite.svg
+
+src/
+└── generated/
+    ├── icons.ts
+    ├── icons.json
+    ├── metadata.json
+    ├── index.ts
+    └── preview.html
+```
+
+---
+
+## ⚠️ Important
+
+Do not edit generated files manually.
+
+Files inside:
+
+```txt
+public/icons/
+src/generated/
+```
+
+are automatically regenerated every time you run:
+
+```bash
+pnpm exec stirod-svg-toolkit build
+```
+
+---
+
+## 📂 Project Structure
+
+After initialization your project will contain:
+
+```txt
+svg-icons/
+└── .gitkeep
+
+stirod.config.js
+```
+
+### svg-icons/
+
+Source directory for your SVG files.
+
+Add all icons here before running the build command.
+
+### stirod.config.js
+
+Toolkit configuration file.
+
+Used to configure:
+
+- Source SVG directory
+- Sprite output location
+- Generated files location
+
+---
+
+## 🛠️ Optional Scripts
+
+To simplify your workflow, add scripts to your project:
 
 ```json
 {
@@ -106,7 +227,7 @@ Para simplificar el flujo de trabajo puedes agregar scripts a tu proyecto:
 }
 ```
 
-Luego podrás ejecutar:
+Then run:
 
 ```bash
 pnpm icons:init
@@ -121,7 +242,7 @@ Generated configuration:
 
 ```js
 export default {
-  iconsDir: "./icons",
+  iconsDir: "./svg-icons",
 
   output: {
     sprite: "./public/icons/sprite.svg",
@@ -134,32 +255,6 @@ export default {
     preview: true,
   },
 };
-```
-
----
-
-## 📂 Output Structure
-
-After running:
-
-```bash
-stirod-svg-toolkit build
-```
-
-Generated files:
-
-```txt
-public/
-└── icons/
-    └── sprite.svg
-
-src/
-└── generated/
-    ├── icons.ts
-    ├── icons.json
-    ├── metadata.json
-    ├── index.ts
-    └── preview.html
 ```
 
 ---
@@ -225,33 +320,6 @@ src/generated/preview.html
 ```
 
 Open it in your browser to inspect all generated icons.
-
----
-
-## 🛣️ Roadmap
-
-### v1.1
-
-- Better SVG validation messages
-- Watch mode
-- Interactive init command
-- Improved preview experience
-
-### v2.0
-
-- Astro adapter
-- React adapter
-- Vue adapter
-- Svelte adapter
-- Icon component generators
-
----
-
-## 🤝 Contributing
-
-Contributions, ideas and improvements are welcome.
-
-Feel free to open an issue or submit a pull request.
 
 ---
 
