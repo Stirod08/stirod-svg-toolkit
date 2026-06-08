@@ -1,5 +1,5 @@
 export default {
-  iconsDir: "./icons",
+  iconsDir: "./svg-icons",
 
   output: {
     sprite: "./public/icons/sprite.svg",

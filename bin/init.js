@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const ICONS_DIR = "./icons";
+const ICONS_DIR = "./svg-icons";
 const CONFIG_FILE = "./stirod.config.js";
 
 if (!existsSync(ICONS_DIR)) {
