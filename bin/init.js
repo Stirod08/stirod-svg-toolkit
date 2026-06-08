@@ -9,9 +9,9 @@ if (!existsSync(ICONS_DIR)) {
 
   writeFileSync(join(ICONS_DIR, ".gitkeep"), "");
 
-  console.log("✅ Created icons/");
+  console.log("✅ Created svg-icons/");
 } else {
-  console.log("ℹ️ icons/ already exists");
+  console.log("ℹ️ svg-icons/ already exists");
 }
 
 if (!existsSync(CONFIG_FILE)) {
