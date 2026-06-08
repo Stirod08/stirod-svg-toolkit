@@ -152,49 +152,91 @@ const previewHtml = `<!DOCTYPE html>
 <title>Stirod Icons Preview</title>
 
 <style>
+
+:root {
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --background: #f9fafb;
+    --card: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: sans-serif;
+    margin: 0;
     padding: 2rem;
+    font-family: Inter, Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
 }
 
 h1 {
-    margin-bottom: 2rem;
+    margin: 0 0 2rem;
+    font-size: 2rem;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
 }
 
 .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     padding: 1rem;
-    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.75rem;
+
+    transition: transform 0.15s ease;
 }
 
-svg {
-    width: 48px;
-    height: 48px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.icon {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
 }
 
 .name {
-    margin-top: 1rem;
     font-size: 14px;
+    font-weight: 600;
+    text-align: center;
 }
+
+.meta {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h1>Stirod Icons</h1>
+<h1>🚀 Stirod Icons Preview</h1>
 
 <div class="grid">
 
@@ -202,11 +244,21 @@ ${iconNames
   .map(
     (name) => `
 <div class="card">
-    <svg>
-        <use href="../../public/icons/sprite.svg#${name}">
-    </svg>
 
-    <div class="name">${name}</div>
+    <div class="icon">
+        <svg>
+            <use href="../../public/icons/sprite.svg#${name}" />
+        </svg>
+    </div>
+
+    <div class="name">
+        ${name}
+    </div>
+
+    <div class="meta">
+        ${metadata[name].viewBox}
+    </div>
+
 </div>
 `,
   )
